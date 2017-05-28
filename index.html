@@ -41,7 +41,7 @@ class MarkDown extends React.Component {
 
 		return (
 			<div>
-			//Input field
+			{/*Input field*/}
 			<div className="inputStyle">
 				<form>
 					<textarea 
@@ -51,11 +51,11 @@ class MarkDown extends React.Component {
 						onChange={this.Change} />
 				</form>
 			</div>
-			//Field in which parsed text is displayed
+			{/*Field in which parsed text is displayed*/}
 			<div className="outputStyle">
 				<div dangerouslySetInnerHTML={{__html: mark}} />
 			</div>
-			//footer
+			{/*footer*/}
 			<div className="footer">Markdown Previewer, created by <a href="https://sebgrebe.github.io/">sebgrebe</a> with <a href="https://cdnjs.com/libraries/marked">marked</a> and <a href="https://facebook.github.io/react/"><img src="reactlogo.png" height="28px" width="auto"></img></a></div>
 		</div>
 		)
