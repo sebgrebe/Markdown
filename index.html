@@ -1,0 +1,71 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>Markdown Previewer</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<!-- jQuery -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+
+<!--Markdown: Markdown parser, transforms strings into markdown-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/marked/0.3.6/marked.js"></script>
+
+<!-- React-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.3.1/react.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.3.1/react-dom.min.js"></script>
+
+<!-- CSS Stylesheet-->
+	<link rel="stylesheet" href="markdown.css" type="text/css">
+
+<!--Babel compiler-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.24/browser.js"></script>
+</head>
+<body>
+<div id="app"></div>
+<script type="text/babel">
+class MarkDown extends React.Component {
+	constructor(props) {
+		super(props);
+		this.state = {value: "Heading\n=======\n\nSub-heading\n-----------\n\n### Another deeper heading\n\nParagraphs are separated\nby a blank line.\n\nLeave 2 spaces at the end of a line to do a\nline break\n\nText attributes *italic*, **bold**,\n`monospace`, ~~strikethrough~~ .\n\nShopping list:\n\n* apples\n* oranges\n* pears\n\nNumbered list:\n\n1. apples\n2. oranges\n3. pears\n\nThe rain---not the reign---in\nSpain.\n\n *[Herman Fassett](https://freecodecamp.com/hermanfassett)*"};
+		this.Change = this.Change.bind(this);
+	}
+	// when text is put into the input form, state-value property is updated //
+	Change(event){
+		this.setState({
+			value: event.target.value
+		});	
+	}
+
+	render() {
+		//mark contains the text put into the input form, translated into markdown by //marked
+		var mark = marked(this.state.value);
+
+		return (
+			<div>
+			//Input field
+			<div className="inputStyle">
+				<form>
+					<textarea 
+						className="textareaStyle"
+						placeholder="Type here"
+						value={this.state.value}
+						onChange={this.Change} />
+				</form>
+			</div>
+			//Field in which parsed text is displayed
+			<div className="outputStyle">
+				<div dangerouslySetInnerHTML={{__html: mark}} />
+			</div>
+			//footer
+			<div className="footer">Markdown Previewer, created by <a href="https://sebgrebe.github.io/">sebgrebe</a> with <a href="https://cdnjs.com/libraries/marked">marked</a> and <a href="https://facebook.github.io/react/"><img src="reactlogo.png" height="28px" width="auto"></img></a></div>
+		</div>
+		)
+	}
+}
+
+//renders MarkDown
+ReactDOM.render(<MarkDown />, document.getElementById('app'));
+
+</script>
+
+</body>
+</html>
